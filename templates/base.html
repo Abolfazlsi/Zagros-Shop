@@ -1,0 +1,31 @@
+{% load static %}
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "includes/head_references.html" %}
+    
+</head>
+
+<body>
+<!-- Topbar Start -->
+{% include "includes/tapbar_references.html" %}
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+{% render_partial "product:navbar" %}
+<!-- Navbar End -->
+
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer Start -->
+{% include "includes/footer.html" %}
+<!-- Footer End -->
+
+</body>
+
+</html>

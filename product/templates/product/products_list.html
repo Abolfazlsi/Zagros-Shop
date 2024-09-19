@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="{% url "home:home" %}">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{% url "product:product_list" %}">Shop</a>
+                    <span class="breadcrumb-item active">Shop List</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-4">
+                <!-- Price Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-white pr-3">Filter by price</span>
+                </h5>
+                <form>
+
+                    <div class="bg-light p-4 mb-30">
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <label for="price-all" class="m-1">Min</label>
+                            <input type="number" class="form-control" checked id="price-all" name="min_price"
+                                   value="{{ request.GET.min_price }}">
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <label for="price-all" class="m-1">Max</label>
+                            <input type="number" class="form-control" checked id="price-all" name="max_price"
+                                   value="{{ request.GET.max_price }}">
+                        </div>
+
+                    </div>
+                    <!-- Price End -->
+
+                    <!-- Color Start -->
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-white pr-3">Filter by color</span>
+                    </h5>
+                    <div class="bg-light p-4 mb-30">
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="color" value="White"
+                                   class="custom-control-input" id="color-1" {% if request.GET.color == "White" %}
+                                   checked {% endif %}>
+                            <label class="custom-control-label" for="color-1">White</label>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="color" value="Black"
+                                   class="custom-control-input" id="color-2" {% if request.GET.color == "Black" %}
+                                   checked {% endif %}>
+                            <label class="custom-control-label" for="color-2">Black</label>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="color" value="Blue"
+                                   class="custom-control-input" id="color-3" {% if request.GET.color == "Blue" %}
+                                   checked {% endif %}>
+                            <label class="custom-control-label" for="color-3">Blue</label>
+                        </div>
+                    </div>
+                    <!-- Color End -->
+
+                    <!-- Size Start -->
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-white pr-3">Filter by size</span>
+                    </h5>
+                    <div class="bg-light p-4 mb-30">
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="size" value="M" class="custom-control-input"
+                                   id="size-1" {% if request.GET.size == "M" %}
+                                   checked {% endif %}>
+                            <label class="custom-control-label" for="size-1">M</label>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="size" value="XS" class="custom-control-input"
+                                   id="size-2" {% if request.GET.size == "XS" %}
+                                   checked {% endif %}>
+                            <label class="custom-control-label" for="size-2">XS</label>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="size" value="L" class="custom-control-input"
+                                   id="size-3" {% if request.GET.size == "L" %}
+                                   checked {% endif %}>
+                            <label class="custom-control-label" for="size-3">L</label>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-warning"></input>
+                </form>
+                <!-- Size End -->
+            </div>
+            <!-- Shop Sidebar End -->
+
+
+            <!-- Shop Product Start -->
+            <div class="col-lg-9 col-md-8">
+                <div class="row pb-3">
+                    <div class="col-12 pb-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div>
+                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                            </div>
+                            <div class="ml-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                                            data-toggle="dropdown">Sorting
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Latest</a>
+                                        <a class="dropdown-item" href="#">Popularity</a>
+                                        <a class="dropdown-item" href="#">Best Rating</a>
+                                    </div>
+                                </div>
+                                <div class="btn-group ml-2">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                                            data-toggle="dropdown">Showing
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">10</a>
+                                        <a class="dropdown-item" href="#">20</a>
+                                        <a class="dropdown-item" href="#">30</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for product in object_list %}
+                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src="{{ product.image.url }}" alt="">
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate btn btn-outline-dark"
+                                       href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>${{ product.price|format_price }}</h5>
+                                        <h6 class="text-muted ml-2">
+                                            <del>${{ product.discount|format_price }}</del>
+                                        </h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class="fa fa-star text-warning mr-1"></small>
+                                        <small>({{ product.ratings.all.count }})</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="col-12">
+                        <nav>
+                            {% if page_obj.has_other_pages %}
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                         <li class="page-item"><a class="page-link text text-warning" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                                        </li>
+                                    {% endif %}
+                                    {% for item in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == item %}
+                                            <li class="page-item active"><a class="page-link text bg-warning"
+                                                                            href="?page=
+                                                {{ item }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                                {{ item }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page=
+                                                    {{ item }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ item }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link text text-warning" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Shop Product End -->
+        </div>
+    </div>
+    <!-- Shop End -->
+
+    {% include "includes/js_references.html" %}
+
+
+{% endblock %}
